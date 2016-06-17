@@ -7,6 +7,7 @@ global $wpdevfbia_enableads;
 global $wpdevfbia_ad_1;
 global $wpdevfbia_ad_2;
 global $wpdevfbia_ad_3;
+global $wpdevfbia_ad_4;
 global $wpdevfbia_enableanalytics;
 global $wpdevfbia_analyticsid;
 global $wpdevfbia_grouptrack;
@@ -31,6 +32,9 @@ if (!empty($wpdevfbia_ad_2)) {
 }
 if (!empty($wpdevfbia_ad_3)) {
   $fbadid[] = $wpdevfbia_ad_3;
+}
+if (!empty($wpdevfbia_ad_4)) {
+  $fbadid[] = $wpdevfbia_ad_4;
 }
 
 header('Content-Type: '.feed_content_type('rss-http').'; charset='.get_option('blog_charset'), true);

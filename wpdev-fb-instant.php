@@ -3,7 +3,7 @@
 Plugin Name: WP Developers | Facebook Instant Articles
 Plugin URI: http://wpdevelopers.com
 Description: Take advantage of Facebook's Instant Articles.
-Version: 1.0.1
+Version: 1.0.2
 Author: Tyler Johnson
 Author URI: http://tylerjohnsondesign.com/
 Copyright: Tyler Johnson
@@ -208,6 +208,14 @@ class WPDevFBIA {
 			'wpdev_fbia_setting_section' // section
 		);
 
+    add_settings_field(
+			'ad_id_4_5', // id
+			'Ad ID 4', // title
+			array( $this, 'ad_id_4_5_callback' ), // callback
+			'wpdev-fbia-admin', // page
+			'wpdev_fbia_setting_section' // section
+		);
+
 		add_settings_field(
 			'enable_analytics_5', // id
 			'Enable Analytics', // title
@@ -253,6 +261,10 @@ class WPDevFBIA {
 
 		if ( isset( $input['ad_id_3_4'] ) ) {
 			$sanitary_values['ad_id_3_4'] = sanitize_text_field( $input['ad_id_3_4'] );
+		}
+
+    if ( isset( $input['ad_id_4_5'] ) ) {
+			$sanitary_values['ad_id_4_5'] = sanitize_text_field( $input['ad_id_4_5'] );
 		}
 
 		if ( isset( $input['enable_analytics_5'] ) ) {
@@ -309,6 +321,13 @@ class WPDevFBIA {
 		);
 	}
 
+  public function ad_id_4_5_callback() {
+		printf(
+			'<input class="regular-text" type="text" name="wpdev_fbia_option_name[ad_id_4_5]" id="ad_id_4_5" value="%s">',
+			isset( $this->wpdev_fbia_options['ad_id_4_5'] ) ? esc_attr( $this->wpdev_fbia_options['ad_id_4_5']) : ''
+		);
+	}
+
 	public function enable_analytics_5_callback() {
 		printf(
 			'<input type="checkbox" name="wpdev_fbia_option_name[enable_analytics_5]" id="enable_analytics_5" value="enable_analytics_5" %s> <label for="enable_analytics_5">Enable Google Analytics tracking.</label>',
@@ -342,6 +361,7 @@ $wpdevfbia_enableads = $wpdev_fbia_options['enable_ads_1']; // Enable Ads
 $wpdevfbia_ad_1 = $wpdev_fbia_options['ad_id_1_2']; // Ad ID 1
 $wpdevfbia_ad_2 = $wpdev_fbia_options['ad_id_2_3']; // Ad ID 2
 $wpdevfbia_ad_3 = $wpdev_fbia_options['ad_id_3_4']; // Ad ID 3
+$wpdevfbia_ad_4 = $wpdev_fbia_options['ad_id_4_5']; // Ad ID 3
 $wpdevfbia_enableanalytics = $wpdev_fbia_options['enable_analytics_5']; // Enable Analytics
 $wpdevfbia_analyticsid = $wpdev_fbia_options['analytics_id_6']; // Analytics ID
 $wpdevfbia_grouptrack = $wpdev_fbia_options['enable_instant_articles_group_tracking_7']; // Enable Instant Articles Group Tracking
