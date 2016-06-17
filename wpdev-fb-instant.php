@@ -47,13 +47,13 @@ register_deactivation_hook(__FILE__, 'wpdev_fb_instant_deactivate');
 Plugin updates
 **/
 require 'plugin-update-checker/plugin-update-checker.php';
-$wpdevtoolsClassName = PucFactory::getLatestClassVersion('PucGitHubChecker');
-$myUpdateChecker->setAccessToken('4921ce230f2bd252dd1fafc7afeac812ddf091de');
-$wpdevtoolsUpdateChecker = new $wpdevtoolsClassName(
+$wpdevClassName = PucFactory::getLatestClassVersion('PucGitHubChecker');
+$wpdevUpdateChecker = new $wpdevClassName(
     'https://github.com/LibertyAllianceGit/wpdev-fb-instant',
     __FILE__,
     'master'
 );
+$wpdevUpdateChecker->setAccessToken('4921ce230f2bd252dd1fafc7afeac812ddf091de');
 
 /**
 Enqueue Plugin Files
