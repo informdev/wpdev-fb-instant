@@ -1,0 +1,26 @@
+.wpdev-fbia-wrap a {
+    color: #444f92;
+    font-weight: bold;
+}
+
+.wpdev-fbia-wrap h2 {
+    color: #444f92;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.wpdev-fbia-wrap .form-table th {
+    text-transform: uppercase;
+}
+
+.wpdev-fbia-wrap input#submit {
+    background: #444f92;
+    border: none;
+    text-shadow: none;
+}
+
+.wpdev-fbia-wrap input#submit:hover {
+    background: #393939;
+}
