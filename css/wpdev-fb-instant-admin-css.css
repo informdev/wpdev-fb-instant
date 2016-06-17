@@ -24,3 +24,8 @@
 .wpdev-fbia-wrap input#submit:hover {
     background: #393939;
 }
+
+div#wpdev_fb_instant-wpdevelopers-facebook-instant-articles h2.hndle.ui-sortable-handle {
+    background: #444f92;
+    color: #fff;
+}

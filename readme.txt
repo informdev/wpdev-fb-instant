@@ -25,6 +25,9 @@ Creates an RSS feed, which generates Facebook Instant Article compliant code, fo
 == Screenshots ==
 
 == Changelog ==
+= 1.0.1 =
+* Update admin colors.
+
 = 1.0.0 =
 * Plugin release.
 
