@@ -203,6 +203,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "/(<p><script.*?src=\")(.*?platform.instagram.*?|.*?platform.twitter.*?)(\".*?<\/script><\/p>)/",
                 "/(<p><iframe.*?src=\")(.*?youtu.*?)(\".*?<\/iframe><\/p>)/",
                 "/(<p>)(.*?youtube.*?)(<\/p>)/",
+                "/(<p><\/p>)/",
               );
               $replaceclean = array(
                 "", // Remove abrr
@@ -313,6 +314,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "$0</iframe></figure>", // Instagram/Twitter embed end
                 "<figure class=\"op-interactive\"><iframe width=\"560\" height=\"315\" src=\"$2\"></iframe></figure>", // YouTube embed
                 "<figure class=\"op-interactive\"><iframe width=\"560\" height=\"315\" src=\"$2\"></iframe></figure>", // YouTube embed link
+                "", // Remove empty p
               );
               $cleanedcontent = preg_replace($patternclean, $replaceclean, $entitycontent);
               ?>

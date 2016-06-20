@@ -3,7 +3,7 @@
 Plugin Name: WP Developers | Facebook Instant Articles
 Plugin URI: http://wpdevelopers.com
 Description: Take advantage of Facebook's Instant Articles.
-Version: 1.0.2
+Version: 1.0.3
 Author: Tyler Johnson
 Author URI: http://tylerjohnsondesign.com/
 Copyright: Tyler Johnson
