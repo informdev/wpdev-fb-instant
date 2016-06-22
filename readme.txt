@@ -25,6 +25,9 @@ Creates an RSS feed, which generates Facebook Instant Article compliant code, fo
 == Screenshots ==
 
 == Changelog ==
+= 1.0.4 =
+* Add support for Twitter URL embed.
+
 = 1.0.3 =
 * Bug fix. Clean empty paragraphs.
 
