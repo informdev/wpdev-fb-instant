@@ -48,7 +48,6 @@ Plugin updates
 **/
 require 'plugin-update-checker/plugin-update-checker.php';
 $wpdevClassName = PucFactory::getLatestClassVersion('PucGitHubChecker');
-$wpdevUpdateChecker->setAccessToken('4921ce230f2bd252dd1fafc7afeac812ddf091de');
 $wpdevUpdateChecker = new $wpdevClassName(
     'https://github.com/LibertyAllianceGit/wpdev-fb-instant',
     __FILE__,
