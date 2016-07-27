@@ -2,8 +2,8 @@
 Contributors: TylerJohnsonLA, TedSlaterLA
 Tags: liberty alliance, facebook instant articles, rss feed
 Requires at least: 4.0
-Tested up to: 4.5.2
-Stable tag: 4.5.2
+Tested up to: 4.5.3
+Stable tag: 4.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,9 @@ Creates an RSS feed, which generates Facebook Instant Article compliant code, fo
 == Screenshots ==
 
 == Changelog ==
+= 1.0.5 =
+* Regex bug fixes.
+
 = 1.0.4 =
 * Add support for Twitter URL embed.
 
