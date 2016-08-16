@@ -205,6 +205,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "/(<p><iframe.*?src=\")(.*?vine\.co.*?)(\".*?><\/iframe><script.*?<\/script><\/p>)/",
                 "/(<blockquote.*?twitter-tweet\"|<blockquote.*?instagram-media\")/",
                 "/(<p><script.*?src=\")(.*?platform.instagram.*?|.*?platform.twitter.*?)(\".*?<\/script><\/p>)/",
+                "/(<p>)(https.*?twitter.*?)(<\/p>)/",
                 "/(<p><iframe.*?src=\")(.*?youtu.*?)(\".*?<\/iframe><\/p>)/",
                 "/(<p>)(.*?youtube.*?)(<\/p>)/",
                 "/(<p><\/p>)/",
@@ -320,6 +321,8 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "<figure class=\"op-interactive\"><iframe src=\"$2\" width=\"600\" height=\"600\"></iframe></figure>", // Vine embed
                 "<figure class=\"op-interactive\"><iframe>$0", // Instagram/Twitter embed start
                 "$0</iframe></figure>", // Instagram/Twitter embed end
+                "<figure class=\"op-social\"><iframe><blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\"><a href=\"$2\"></a></blockquote>
+                <script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script></iframe></figure>", // Twitter Link Embed
                 "<figure class=\"op-interactive\"><iframe width=\"560\" height=\"315\" src=\"$2\"></iframe></figure>", // YouTube embed
                 "<figure class=\"op-interactive\"><iframe width=\"560\" height=\"315\" src=\"$2\"></iframe></figure>", // YouTube embed link
                 "", // Remove empty p
