@@ -208,6 +208,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "/(<p>)(https.*?twitter.*?)(<\/p>)/",
                 "/(<p><iframe.*?src=\")(.*?youtu.*?)(\".*?<\/iframe><\/p>)/",
                 "/(<p>)(.*?youtube.*?)(<\/p>)/",
+		"/(<p>)(.*?youtu..*?\/)(.*?)(<\/p>)/",
                 "/(<p><\/p>)/",
               );
               $replaceclean = array(
@@ -325,6 +326,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 <script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script></iframe></figure>", // Twitter Link Embed
                 "<figure class=\"op-interactive\"><iframe width=\"560\" height=\"315\" src=\"$2\"></iframe></figure>", // YouTube embed
                 "<figure class=\"op-interactive\"><iframe width=\"560\" height=\"315\" src=\"$2\"></iframe></figure>", // YouTube embed link
+		"<figure class=\"op-interactive\"><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/watch?v=$3\"></iframe></figure>", // YouTube embed link
                 "", // Remove empty p
               );
               $cleanedcontent = preg_replace($patternclean, $replaceclean, $entitycontent);
