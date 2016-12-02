@@ -26,6 +26,10 @@ Creates an RSS feed, which generates Facebook Instant Article compliant code, fo
 
 == Changelog ==
 
+= 1.0.9.3 =
+* HTML Entity removal fix.
+* Facebook class update. Updated from class="op-social" to class="op-interactive".
+
 = 1.0.9.2 =
 * Regex bug fix.
 

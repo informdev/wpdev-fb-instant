@@ -92,7 +92,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
               "&copy;",
               "&reg;",
               );
-              $entitycontent = str_replace('', '&nbsp;', $pcontent);
+              $entitycontent = str_replace($entities, '', $pcontent);
               // Clean the Content
               $patternclean = array(
                 "/<abrr.*?>.*?<\/abbr>/",
@@ -178,7 +178,6 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "/<var.*?>.*?<\/var>/",
                 "/<wbr.*?>.*?<\/wbr>/",
                 "/&mdash;/",
-                "/(<strong.*?>)(.*?)(<\/strong.*?>)/",
                 "/(<b.*?>)(.*?)(<\/b.*?>)/",
                 "/(<address.*?>)(.*?)(<\/address.*?>)/",
                 "/(<caption.*?>)(.*?)(<\/caption.*?>)/",
@@ -197,6 +196,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "/(<h4.*?>)(.*?)(<\/h4.*?>)/",
                 "/(<h5.*?>)(.*?)(<\/h5.*?>)/",
                 "/(<h6.*?>)(.*?)(<\/h6.*?>)/",
+                "/(<strong.*?>)(.*?)(<\/strong.*?>)/",
                 "/(<p.*?\"?>)/",
                 "/(<p><a.*?><img.*src=\")(.*?)(\".*\/><\/a><\/p>)/",
                 "/(<p><img.*?src=\")(.*?)(\".*?\/><\/p>)/",
@@ -296,7 +296,6 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "", // Remove var
                 "", // Remove wbr
                 "", // Remove &mdash;
-                "$2", // Keep Content, Remove strong
                 "$2", // Keep Content, Remove b
                 "$2", // Keep Content, Remove address
                 "$2", // Keep Content, Remove caption
@@ -314,7 +313,8 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "<p>$2</p>", // Replace H3
                 "<p>$2</p>", // Replace H4
                 "<p>$2</p>", // Replace H5
-                "<p>$2</p>", // Replace H6 https://www.youtube.com/watch?v=ztmF73bri_s
+                "<p>$2</p>", // Replace H6
+                "<strong>$2</strong>", // Keep Content, clean strong
                 "<p>", // Remove Classes in p
                 "<figure><img src=\"$2\" /></figure>", // Setup img with link
                 "<figure><img src=\"$2\" /></figure>", // Setup img without link
@@ -324,7 +324,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "<figure class=\"op-interactive\"><iframe src=\"$2\" width=\"600\" height=\"600\"></iframe></figure>", // Vine embed
                 "<figure class=\"op-interactive\"><iframe>$0", // Instagram/Twitter embed start
                 "$0</iframe></figure>", // Instagram/Twitter embed end
-                "<figure class=\"op-social\"><iframe><blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\"><a href=\"$2\"></a></blockquote>
+                "<figure class=\"op-interactive\"><iframe><blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\"><a href=\"$2\"></a></blockquote>
                 <script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script></iframe></figure>", // Twitter Link Embed
                 "<figure class=\"op-interactive\"><iframe width=\"560\" height=\"315\" src=\"$2\"></iframe></figure>", // YouTube embed
                 "<figure class=\"op-interactive\"><iframe width=\"560\" height=\"315\" src=\"$2\"></iframe></figure>", // YouTube embed link
