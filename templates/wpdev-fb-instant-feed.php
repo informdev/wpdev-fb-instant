@@ -203,6 +203,8 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "/(<p>\[caption.*?\]<a.*?\"><img.*?src=\")(.*?)(\".*?<\/a>)(.*?)(\[\/caption.*?<\/p>)/",
                 "/(<p>\[caption.*?\]<img.*?src=\")(.*?)(\".*?\/>)(.*?)(\[\/caption.*?<\/p>)/",
                 "/(<p.*?>\[.*?\]<\/p>)/",
+                "/(<p><iframe.*?src=\")(.*?facebook.*?post.*?)(\".*?width=\")(.*?)(\".*?height=\")(.*?)(\".*?<\/iframe><\/p>)/",
+                "/(<p><iframe.*?src=\")(.*?facebook.*?video.*?)(\".*?width=\")(.*?)(\".*?height=\")(.*?)(\".*?<\/iframe><\/p>)/",
                 "/(<p><iframe.*?src=\")(.*?vine\.co.*?)(\".*?><\/iframe><script.*?<\/script><\/p>)/",
                 "/(<blockquote.*?twitter-tweet\"|<blockquote.*?instagram-media\")/",
                 "/(<p><script.*?src=\")(.*?platform.instagram.*?|.*?platform.twitter.*?)(\".*?<\/script><\/p>)/",
@@ -321,6 +323,8 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
                 "<figure><img src=\"$2\" /><figcaption class=\"op-vertical-below\"><cite class=\"op-vertical-below op-center\">$4</cite></figcaption></figure>", // Setup img with caption and with link
                 "<figure><img src=\"$2\" /><figcaption class=\"op-vertical-below\"><cite class=\"op-vertical-below op-center\">$4</cite></figcaption></figure>", // Setup img with caption and without link
                 "", // Remove shortcodes
+                "<figure class=\"op-interactive\"><iframe style=\"border: none; overflow: hidden;\" src=\"$2\" width=\"$4\" height=\"$6\" frameborder=\"0\" scrolling=\"no\"></iframe></figure>", // Embed Facebook Post
+                "<figure class=\"op-interactive\"><iframe src=\"$2\" width=\"$4\" height=\"$6\" style=\"border:none;overflow:hidden;\" scrolling=\"no\" frameborder=\"0\" allowTransparency=\"true\" allowFullScreen=\"true\"></iframe></figure>", // Embed Facebook Video
                 "<figure class=\"op-interactive\"><iframe src=\"$2\" width=\"600\" height=\"600\"></iframe></figure>", // Vine embed
                 "<figure class=\"op-interactive\"><iframe>$0", // Instagram/Twitter embed start
                 "$0</iframe></figure>", // Instagram/Twitter embed end
