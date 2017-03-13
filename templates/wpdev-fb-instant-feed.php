@@ -95,8 +95,8 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
               $entitycontent = str_replace($entities, '', $pcontent);
               // Clean the Content
               $patternclean = array(
-                "/(.*?)([\/.*?])",
-                "/[.*?]/",
+                "/(\[.*?\])(.*?)(\[\/.*?\])/",
+                "/\[.*?\]/",
                 "/<abrr.*?>.*?<\/abbr>/",
                 "/<acronym.*?>.*?<\/acronym>/",
                 "/<applet.*?>.*?<\/applet>/",
