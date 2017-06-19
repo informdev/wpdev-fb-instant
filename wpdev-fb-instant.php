@@ -3,12 +3,12 @@
 Plugin Name: WP Developers | Facebook Instant Articles
 Plugin URI: http://wpdevelopers.com
 Description: Take advantage of Facebook's Instant Articles.
-Version: 1.0.9.6
+Version: 1.0.9.7
 Author: Tyler Johnson
 Author URI: http://tylerjohnsondesign.com/
 Copyright: Tyler Johnson
 Text Domain: wpdevfbinstant
-Copyright 2016 WP Developers. All Rights Reserved.
+Copyright 2017 WP Developers. All Rights Reserved.
 */
 
 /**
@@ -350,8 +350,33 @@ class WPDevFBIA {
 	}
 
 }
-if ( is_admin() )
-	$wpdev_fbia = new WPDevFBIA();
+
+
+/**
+Admin Access Check
+**/
+function wpdev_fbamp_admin_check() {
+    // List of authorized users
+    $userlist = array('tyler@klicked.com', 'tyler@libertyalliance.com', 'tyler@wpdevelopers.com', 'ted@klicked.com', 'ted@libertyalliance.com', 'ted@patriotads.com', 'jared@klicked.com', 'jared@libertyalliance.com', 'jared@wpdevelopers.com', 'jared@patriotads.com');
+    // ID Check
+    $idarray = array();
+    foreach ($userlist as $user) {
+        $userid = get_user_by('email', $user);
+        $idarray[] = $userid->ID;
+    }
+    // Get current user
+    $currentuser = get_current_user_id();
+
+    // Check for users
+    if(is_array($idarray) && in_array($currentuser, $idarray) && is_admin()) {
+        $wpdev_fbia = new WPDevFBIA();
+    } elseif($currentuser == $idarray && is_admin()) {
+        $wpdev_fbia = new WPDevFBIA();
+    } else {
+        // No admin page for you. You're not authorized.
+    }
+}
+add_action('init', 'wpdev_fbamp_admin_check');
 
 // Get Plugin Options
 $wpdev_fbia_options = get_option( 'wpdev_fbia_option_name' );

@@ -26,6 +26,9 @@ Creates an RSS feed, which generates Facebook Instant Article compliant code, fo
 
 == Changelog ==
 
+= 1.0.9.7 =
+* Bug fix.
+
 = 1.0.9.6 =
 * Urgent bug fix.
 
