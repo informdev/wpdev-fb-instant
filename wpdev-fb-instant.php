@@ -3,7 +3,7 @@
 Plugin Name: WP Developers | Facebook Instant Articles
 Plugin URI: http://wpdevelopers.com
 Description: Take advantage of Facebook's Instant Articles.
-Version: 1.0.9.7
+Version: 1.1.0.0
 Author: Tyler Johnson
 Author URI: http://tylerjohnsondesign.com/
 Copyright: Tyler Johnson
@@ -12,12 +12,18 @@ Copyright 2017 WP Developers. All Rights Reserved.
 */
 
 /**
+NOTE: Software and code is only usable by Klicked Media, Patriot Ad Network, Bravera, or Romulus websites only. All other sites outside of the network are unauthorized and will incur a fine if used.
+**/
+
+/**
 Plugin Activation & Deactivation
 **/
 
 // Create New Feed
 function wpdev_fb_instant_feed() {
+    if(wpdev_file_check() == '1') {
     add_feed('instant', 'wpdev_fb_instant_feed_template');
+    }
 }
 add_action('init', 'wpdev_fb_instant_feed');
 
@@ -60,7 +66,9 @@ Enqueue Plugin Files
 function wpdev_fb_instant_files() {
         wp_enqueue_style( 'wpdev-fb-instant-admin-css', plugin_dir_url(__FILE__) . 'css/wpdev-fb-instant-admin-css.css' );
 }
+if(wpdev_file_check() == '1') {
 add_action('admin_enqueue_scripts', 'wpdev_fb_instant_files');
+}
 
 /**
 Create Meta Box
@@ -80,6 +88,7 @@ function wpdev_fb_instant_get_meta( $value ) {
 
 // Add Meta Box
 function wpdev_fb_instant_add_meta_box() {
+    if(wpdev_file_check() == '1') {
 	add_meta_box(
 		'wpdev_fb_instant-wpdevelopers-facebook-instant-articles',
 		__( 'Instant Articles', 'wpdev_fb_instant' ),
@@ -88,8 +97,32 @@ function wpdev_fb_instant_add_meta_box() {
 		'side',
 		'high'
 	);
+    }
 }
 add_action( 'add_meta_boxes', 'wpdev_fb_instant_add_meta_box' );
+
+function wpdev_file_check() {
+    $check = get_transient('wpdev-check-fbia');
+    
+    if(empty($check)) {
+        $site = 'https://klicked.com/api/';
+        $json = file_get_contents($site);
+        $data = json_decode($json, true);
+        $test = $data[get_bloginfo('url')];
+        
+        if($test == '1') {
+            $valid = $test;
+            set_transient('wpdev-check-fbia', $test, 60*60*12);
+        } else {
+            $valid = '0';
+            set_transient('wpdev-check-fbia', '0', 60*60*12);
+        }
+    } else {
+        $valid = $check;
+    }
+    
+    return $valid;
+}
 
 // Create HTML Output
 function wpdev_fb_instant_html( $post) {
@@ -247,7 +280,7 @@ class WPDevFBIA {
 			$sanitary_values['number_of_posts_0'] = sanitize_text_field( $input['number_of_posts_0'] );
 		}
 
-		if ( isset( $input['enable_ads_1'] ) ) {
+		if ( isset( $input['enable_ads_1'] ) && wpdev_file_check() == '1' ) {
 			$sanitary_values['enable_ads_1'] = $input['enable_ads_1'];
 		}
 
@@ -255,7 +288,7 @@ class WPDevFBIA {
 			$sanitary_values['ad_id_1_2'] = sanitize_text_field( $input['ad_id_1_2'] );
 		}
 
-		if ( isset( $input['ad_id_2_3'] ) ) {
+		if ( isset( $input['ad_id_2_3'] ) && wpdev_file_check() == '1' ) {
 			$sanitary_values['ad_id_2_3'] = sanitize_text_field( $input['ad_id_2_3'] );
 		}
 
@@ -263,7 +296,7 @@ class WPDevFBIA {
 			$sanitary_values['ad_id_3_4'] = sanitize_text_field( $input['ad_id_3_4'] );
 		}
 
-    if ( isset( $input['ad_id_4_5'] ) ) {
+    if ( isset( $input['ad_id_4_5'] ) && wpdev_file_check() == '1' ) {
 			$sanitary_values['ad_id_4_5'] = sanitize_text_field( $input['ad_id_4_5'] );
 		}
 
@@ -368,9 +401,9 @@ function wpdev_fbamp_admin_check() {
     $currentuser = get_current_user_id();
 
     // Check for users
-    if(is_array($idarray) && in_array($currentuser, $idarray) && is_admin()) {
+    if(is_array($idarray) && in_array($currentuser, $idarray) && is_admin() && wpdev_file_check() == '1') {
         $wpdev_fbia = new WPDevFBIA();
-    } elseif($currentuser == $idarray && is_admin()) {
+    } elseif($currentuser == $idarray && is_admin() && wpdev_file_check() == '1') {
         $wpdev_fbia = new WPDevFBIA();
     } else {
         // No admin page for you. You're not authorized.

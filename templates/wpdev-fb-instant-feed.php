@@ -41,7 +41,7 @@ header('Content-Type: '.feed_content_type('rss-http').'; charset='.get_option('b
 echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
 ?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-<?php do_action('rss2_ns'); ?>
+<?php if(wpdev_file_check() == '1') { do_action('rss2_ns'); } ?>
 <channel>
         <title><?php bloginfo_rss('name'); ?></title>
         <link><?php bloginfo_rss('url'); ?></link>
@@ -69,7 +69,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
           $instantarticles = new WP_Query( $args );
 
           // The Loop
-          if ( $instantarticles->have_posts() ) {
+          if ( $instantarticles->have_posts() && wpdev_file_check() == '1' ) {
           	while ( $instantarticles->have_posts() ) {
           		$instantarticles->the_post();
 
@@ -339,7 +339,11 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
             	  "<figure class=\"op-interactive\"><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/watch?v=$3\"></iframe></figure>", // YouTube embed link
                 "", // Remove empty p
               );
+              if(wpdev_file_check() == '1') {
               $cleanedcontent = preg_replace($patternclean, $replaceclean, $entitycontent);
+              } else {
+              $cleanedcontent = '';
+              }
               ?>
               <item>
                     <title><?php echo $title; ?></title>
